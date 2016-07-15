@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    title Express Gallery
+  body
+
+    if (galleryList.length==0)
+        p No Gallery
+    else
+        each gallery in galleryList
+            p Gallery id: #{gallery.id}
+
+            
+            img(src=gallery.link)
+            p Uploaded By: #{gallery.author}
+            p= description

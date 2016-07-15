@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    title Express Gallery
+  body
+
+
+form(method= methodType, action= actionType, enctype="application/x-www-form-urlencoded")
+ input(type="hidden", name="_method", value="PUT")
+ input(type="text", hidden="hidden", name="id", value= idValue)
+ p Author
+  input(type="text", name="author", value= authorValue)
+ p Link
+  input(type="text", name="link", value= linkValue)
+ p Description
+  textarea(name="description") #{descriptionValue}
+ p
+  input(type="submit")

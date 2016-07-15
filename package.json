@@ -1,0 +1,28 @@
+{
+  "name": "express-gallery",
+  "version": "1.0.0",
+  "description": "Express Gallery ===============",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SpaceKins/express-gallery.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SpaceKins/express-gallery/issues"
+  },
+  "homepage": "https://github.com/SpaceKins/express-gallery#readme",
+  "keywords": [],
+  "dependencies": {
+    "express": "^4.14.0",
+    "pug": "^2.0.0-beta3"
+  },
+  "devDependencies": {
+    "morgan": "^1.7.0"
+  }
+}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    title Express Gallery
+  body
+    h1 Welcome to the gallery!
+    h2 The time is currently #{new Date()}
+
+    | pipe means use plain text
+
+    if(true)
+    #{new Date().getHours()}
+
+    #{new Date().getHours() +3}
+
+    h2 Visitor Count #{visitorCount}
+
+
+    h1= (visitorCount>5)?visitorCount:'None'
