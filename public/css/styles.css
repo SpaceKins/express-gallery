@@ -1,0 +1,71 @@
+div {
+  background-color: steelblue;
+}
+
+html,body{
+  height: 100%;
+}
+
+ul#flex-container{
+  list-style-type:none;
+  margin:0;padding:0;
+
+  display: flex;
+}
+
+ul li{
+  flex-grow: 1;
+  height:150px;
+  padding-top:45px;
+  color:#fff;
+  font-size:2.2em;
+  text-align:center;
+}
+
+ul li:first-child {background: #c2d775;}
+ul li:nth-child(2) {background: #007278;}
+ul li:nth-child(3) {background: #c7b600; flex-grow: 2;}
+ul li:nth-child(4) {background: #a90077;}
+ul li:nth-child(5) {background: #00a378;}
+ul li:nth-child(6) {background: #00ea72;}
+
+.mainContainer{
+  display:flex;
+  flex-flow: row;
+}
+
+.panel{
+  flex-grow: 1;
+}
+
+.page-wrap {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+ }
+
+ #leftPanel{
+  flex: 40px;
+  text-align: center;
+    box-sizing: border-box;
+    line-height: 40px;
+    flex: 1 1 40%; 
+ }
+
+ #mainPanel{
+  flex: 40px;
+  text-align: center;
+    box-sizing: border-box;
+    line-height: 40px;
+    flex: 1 1 10%; 
+ }
+
+#rightPanel{
+  flex: 40px;
+  text-align: center;
+    box-sizing: border-box;
+    line-height: 40px;
+    flex: 1 1 10%; 
+ }

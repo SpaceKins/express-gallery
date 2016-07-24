@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    title Express Gallery
+    link(rel='stylesheet' type='text/css' href='./css/reset.css')
+    link(rel='stylesheet' type='text/css' href='./css/styles.css')
+  body
+  
+  div(id='container')
+    ul(id='flex-container')
+        li 1
+        li 2
+        li 3
+        li 4
+        li 5
+        li 6
+  div(id='mainContainer')
+      section(id='leftPanel' class='panel')  PanelLeft
+
+      section(id='mainPanel' class='panel') PanelCenter
+        div(id='logo') logo
+        div(id='about_company') About Company
+
+        div(id='show_case') Show Main Gallery
+
+        if (galleryList.length==0)
+            p No Gallery
+        else
+            each gallery in galleryList
+                div
+                    p Gallery id: #{gallery.id}
+                    
+                    img(src=gallery.link class='link')
+                    div(class='author') Uploaded By: #{gallery.author}
+                    div(class='description') #{gallery.description}
+
+      section(id='rightPanel' class='panel') PanelRight

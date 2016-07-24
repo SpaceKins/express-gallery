@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 
 var visitorCount = 0;
 app.set('views', path.resolve(__dirname, 'views')); //'./views');
+app.use(express.static(path.resolve(__dirname, 'public')));
 app.set('view engine', 'pug');
 // Set after declaration.  for cleaner code //
 app.use(bodyParser.urlencoded({
@@ -31,7 +32,7 @@ console.log(toSearch.search(regEx));
 
 
 app.get('/', function(req, res) {
-    res.render('gallery', {
+    res.render('galleries', {
         galleryList: galleryList
     })
     // res.send('List all gallery photos');

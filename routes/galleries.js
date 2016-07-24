@@ -19,8 +19,9 @@ router.post('/', function(req, res) {
 router.route('/new')
     .get(function(req, res) {
         res.render('galleryForm', {
-            methodType: 'POST',
-            actionType: '/gallery'
+            methodType: 'POST'
+            ,actionType: '/gallery'
+            ,formTitle:'Create New Gallery'
         });
         //res.send('GET new Photo Form');
     })
@@ -77,6 +78,7 @@ router.route(/\/\d+\/edit/) //  /\/d+\/edit/
         authorValue: thisGalleryPhoto.author,
         linkValue: thisGalleryPhoto.link,
         "descriptionValue": thisGalleryPhoto.description
+        ,formTitle:"Update Gallery"
     });
     //res.send('in ' + req.url);
 
