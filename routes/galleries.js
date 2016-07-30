@@ -40,22 +40,19 @@ router.post('/:id',function(req,res){
 });
 */
 
-var id;
-
-app.all(/\/\d+$/,function(req,res,next){
-    console.log("*************Set Variables **********");
-    next();
-})
-
-
-
 
 router.route(/\/\d+$/) //router.route('/:id')
+.all(function(req,res,next)
+{
+    res.locals.id=cleanParam(req.url);
+    console.log('test');
+    next();
+})
 .get(function(req, res) {
     var id = cleanParam(req.url);
     var thisPhoto;
 
-    Photo.findById(id)
+    Photo.findById(res.locals.id)
         .then(function(photo) {
 
             var thisGalleryArray = [];

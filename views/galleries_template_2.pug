@@ -7,15 +7,24 @@ html(lang="en")
     link(rel='stylesheet' type='text/css' href='./css/styles.css')
   body
   
-    div(id='imagePanel')
+  div(id='mainPanel') 
+    div(id='leftPanel') Left
+    div(id='centerPanel') Center
+    
+        div(id='logo') logo
+        div(id='about_company') About Company
+
+        div(id='show_case') Show Main Gallery
+        div Total Photos = #{galleryList.length}
+
         if (galleryList.length==0)
             p No Gallery
         else
         each gallery in galleryList
-            div(class='images')      
+            div(class='infoInMain_details')      
                 img(src=gallery.link class='link')
                 div(class='author') Uploaded By: #{gallery.author}
                 div(class='description') #{gallery.description}
                 hr
 
-
+    div(id='rightPanel') Right
