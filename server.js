@@ -7,6 +7,16 @@ var Gallery = require('./gallery.js');
 var bodyParser = require('body-parser');
 
 var db = require('./models');
+
+
+var passport = require('passport');
+var BasicStrategy = require('passport-http').BasicStrategy;  // Want to use Basic Authentication Strategy
+
+
+
+
+
+
 var Photo = db.Photo;
 
 var visitorCount = 0;
@@ -17,6 +27,31 @@ app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+
+
+/************************ Passport ****************************************/
+
+var user = { username: 'bob', password: 'secret', email: 'bob@example.com' };
+passport.use(new BasicStrategy(
+  function(username, password, done) {
+    // Example authentication strategy using 
+    if ( !(username === user.username && password === user.password) ) {
+      return done(null, false);
+    }
+    return done(null, user);
+}));
+
+
+app.get('/secret',
+  passport.authenticate('basic', { session: false }),
+  function(req, res) {
+    res.json(req.user);
+  });
+
+
+/*****************************************************************************/
+
+
 app.use('/gallery', galleries);
 
 var galleryList = Gallery.getGalleryPhotos();
@@ -34,7 +69,13 @@ console.log(toSearch.search(regEx));
 
 
 
-app.get('/', function(req, res) {
+app.get('/', 
+
+  passport.authenticate('basic', { session: false }),
+
+
+
+    function(req, res) {
     Photo.findAll()
         .then(function(photos) {
           //  res.json(photos);
@@ -43,6 +84,12 @@ app.get('/', function(req, res) {
             })
         });
 
+/*
+
+  function(req, res) {
+    res.json(req.user);
+  }
+ */
     /*
     res.render('galleries', {
         galleryList: galleryList

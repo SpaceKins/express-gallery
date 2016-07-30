@@ -5,10 +5,26 @@ var querystring = require('querystring');
 var bodyParser = require('body-parser');
 var Gallery = require('./../gallery.js');
 
+var passport = require('passport');
+var BasicStrategy = require('passport-http').BasicStrategy;  // Want to use Basic Authentication Strategy
+
+
+
 var db = require('./../models');
 var Photo = db.Photo;
 
-router.post('/', function(req, res) {
+/*
+passport.authenticate('basic', { session: false }),
+  function(req, res) {
+    res.json(req.user);
+  })
+*/
+
+
+// later use app.use(passport.authenticate('basic', { session: false }));
+
+router.post('/', passport.authenticate('basic', { session: false }),
+  function(req, res) {
     //req.encoding('utf-8');
     //
     var body = req.body;
@@ -25,6 +41,20 @@ router.post('/', function(req, res) {
 })
 
 router.route('/new')
+    .get(
+        passport.authenticate('basic',{session:false}),
+        function(req, res) {
+        res.render('galleryForm', {
+            methodType: 'POST',
+            actionType: '/gallery',
+            formTitle: 'Create New Gallery'
+        });
+        //res.send('GET new Photo Form');
+    }
+    )
+
+/*
+router.route('/new')
     .get(function(req, res) {
         res.render('galleryForm', {
             methodType: 'POST',
@@ -33,13 +63,41 @@ router.route('/new')
         });
         //res.send('GET new Photo Form');
     })
-
+*/
 /*
 router.post('/:id',function(req,res){
   res.send(req.url);
 });
 */
 
+router.route(/\/\d+\/edit/) //  /\/d+\/edit/
+.get(passport.authenticate('basic',{session:false}),function(req, res) {
+    console.log('In Get Route' + req.url);
+    var thisId = cleanParam(req.url.replace('/edit', ''));
+    var thisGalleryPhoto = Gallery.getGalleryPhotoById(thisId);
+
+    console.log('test in Edit');
+    console.log(thisGalleryPhoto);
+    res.render('galleryForm', {
+        methodType: 'PUT',
+        actionType: '/gallery/id',
+        idValue: thisId,
+        authorValue: thisGalleryPhoto.author,
+        linkValue: thisGalleryPhoto.link,
+        "descriptionValue": thisGalleryPhoto.description,
+        formTitle: "Update Gallery"
+    });
+    //res.send('in ' + req.url);
+
+    /*
+        get gallery by id
+        if exist
+        populate form and server back
+        if not respond with no gallery with this id
+         */
+})
+
+//Cant' find page(/gallery/id?id=8&author=test&link=test&description=test)
 
 router.route(/\/\d+$/) //router.route('/:id')
 .all(function(req,res,next)
@@ -70,7 +128,7 @@ router.route(/\/\d+$/) //router.route('/:id')
 
         })
 })
-    .delete(function(req, res) {
+    .delete(passport.authenticate('basic',{session:false}),function(req, res) {
         var id = cleanParam(req.url);
         Photo.destroy({
             where: {
@@ -82,7 +140,7 @@ router.route(/\/\d+$/) //router.route('/:id')
                 res.send('DELETE in Gallery id ' + cleanParam(req.url));
             });
     })
-    .put(function(req, res) {
+    .put(passport.authenticate('basic',{session:false}),function(req, res) {
         var id = cleanParam(req.url);
         var body = req.body;
 
@@ -102,33 +160,7 @@ router.route(/\/\d+$/) //router.route('/:id')
             });
     })
 
-router.route(/\/\d+\/edit/) //  /\/d+\/edit/
-.get(function(req, res) {
-    console.log('In Get Route' + req.url);
-    var thisId = cleanParam(req.url.replace('/edit', ''));
-    var thisGalleryPhoto = Gallery.getGalleryPhotoById(thisId);
 
-    console.log('test');
-    console.log(thisGalleryPhoto);
-    res.render('galleryForm', {
-        methodType: 'PUT',
-        actionType: '/gallery/id',
-        idValue: thisId,
-        authorValue: thisGalleryPhoto.author,
-        linkValue: thisGalleryPhoto.link,
-        "descriptionValue": thisGalleryPhoto.description,
-        formTitle: "Update Gallery"
-    });
-    //res.send('in ' + req.url);
-
-    /*
-        get gallery by id
-        if exist
-        populate form and server back
-        if not respond with no gallery with this id
-         */
-
-})
 
 function cleanParam(thisParam) {
     var paramArray = thisParam.split('/');

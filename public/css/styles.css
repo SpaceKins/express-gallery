@@ -1,5 +1,6 @@
 div {
   /*background-color: steelblue;*/
+  color: #c8c8c8;
 }
 
 html,body{
@@ -17,8 +18,8 @@ html,body{
 */
 
 div{
-  border: solid black 2px;
-  margin:10px;
+  border: solid black 0px;
+ /* margin:10px;*/
 }
 
 #imagePanel{
@@ -49,10 +50,8 @@ div{
   }
 
     .images {   /* infoInMain_details  infoInMain_details*/  
-     flex: 1 1; 
-    background-color: #ff0000;
-     
-     width: 300px;
+     flex: 0 0 33%; 
+
     }
   
     img {
