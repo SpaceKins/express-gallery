@@ -8,6 +8,9 @@ html(lang="en")
   body
   
     div(id='header')
+      div(id='title') _Architekt
+      div(id='company_info') Welcome to our onlilne portfolio, we are small group of passionate designers and architects, looking to change and create amazing digital images to inspire others to follow in our innovative steps. Free Architect WordPress Theme
+    div(id='break') &nbsp;
     div(id='imagePanel')
         if (galleryList.length==0)
             p No Gallery
@@ -15,8 +18,13 @@ html(lang="en")
         each gallery in galleryList
             div(class='images')      
                 img(src=gallery.link class='link')
-                div(class='author') Uploaded By: #{gallery.author}
-                div(class='description') #{gallery.description}
+                div(class='author info') Uploaded By: #{gallery.author}
+                div(class='description  info') #{gallery.description}
                 hr
 
-
+        - var modulus=galleryList.length % 3;
+    
+        - var moreTimes=3-modulus;
+        - for (var i=0;i<moreTimes;i++) {
+             div(class='images')    #{i}
+        - }

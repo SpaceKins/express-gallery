@@ -1,0 +1,11 @@
+{
+    "SESSION": {
+        "secret": "jddfiaidfadda"
+    },
+
+    "CREDENTIALS": {
+        "USERNAME": "bob",
+        "PASSWORD": "password"
+    },
+    "PORT": 8080
+}

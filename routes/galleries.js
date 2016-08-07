@@ -1,9 +1,14 @@
+module.exports=function(express,app,querystring,bodyParser,passport,LocalStrategy){
+
+/*
 var express = require('express');
 var app = express();
-var router = express.Router();
+
 var querystring = require('querystring');
 var bodyParser = require('body-parser');
+*/
 var Gallery = require('./../gallery.js');
+var router = express.Router();
 
 var passport = require('passport');
 var BasicStrategy = require('passport-http').BasicStrategy;  // Want to use Basic Authentication Strategy
@@ -19,6 +24,7 @@ passport.authenticate('basic', { session: false }),
     res.json(req.user);
   })
 */
+
 
 
 // later use app.use(passport.authenticate('basic', { session: false }));
@@ -167,4 +173,5 @@ function cleanParam(thisParam) {
     return paramArray[paramArray.length - 1];
 }
 
-module.exports = router;
+return router;
+}
